@@ -27,4 +27,26 @@ R4 database file `fhir-R4-db.backup` is located under root directory. Load schem
 ```
 $ psql -U postgres -d R4 -f fhir-R4-db.backup 
 ```
+
+### Tomcat Configuration 
+
+**Update application database properties.**
+
+application.properties file under fhir-server/src/main/resources was configured with below database username and passowrd. If you want to use different database username and password then update the values accordingly. 
+
+```  
+jdbc.url=jdbc:postgresql://localhost:5432/fhirdstu3
+jdbc.username=postgres
+jdbc.password=postgres
+```
+
+### Built Application 
+Run Maven build to build application war file. 
+```
+$ mvn clean install 
+```
+This will generate a war file under target/fhir-R4.war. Copy this to your tomcat webapp directory for deployment.
+
+**Start Tomcat service**
+
   
