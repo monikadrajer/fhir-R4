@@ -25,6 +25,6 @@ $ createdb -h localhost -p 5432 -U postgres R4
 R4 database file `fhir-R4-db.backup` is located under root directory. Load schema and sample data using psql command
 
 ```
-$ psql -U postgres -d fhirdstu3 -f fhir-stu3-db.backup 
+$ psql -U postgres -d R4 -f fhir-R4-db.backup 
 ```
   
