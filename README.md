@@ -62,8 +62,8 @@ GET END POINTS:
 
 POST APIS: 
 
-1.	http://localhost:<tomcatport>/fhir-R4/fhir/Questionnaire -- Creates given Questionnaire resource with unique Id. 
-2.	http://localhost:<tomcatport>/fhir-R4/fhir/QuestionnaireResponse -- Creates QuestionnaireResponse resource with unique Id. 
+1.http://localhost:<tomcatport>/fhir-R4/fhir/Questionnaire -- Creates given Questionnaire resource with unique Id. 
+2.http://localhost:<tomcatport>/fhir-R4/fhir/QuestionnaireResponse -- Creates QuestionnaireResponse resource with unique Id. 
 ```
 
 
