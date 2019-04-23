@@ -35,7 +35,7 @@ $ psql -U postgres -d R4 -f fhir-R4-db.backup
 application.properties file under fhir-server/src/main/resources was configured with below database username and passowrd. If you want to use different database username and password then update the values accordingly. 
 
 ```  
-jdbc.url=jdbc:postgresql://localhost:5432/fhirdstu3
+jdbc.url=jdbc:postgresql://localhost:5432/R4
 jdbc.username=postgres
 jdbc.password=postgres
 ```
@@ -48,5 +48,21 @@ $ mvn clean install
 This will generate a war file under target/fhir-R4.war. Copy this to your tomcat webapp directory for deployment.
 
 **Start Tomcat service**
+
+If tomcat starts successfully then you should be able to access below end points. 
+
+GET END POINTS:
+
+1.	http://localhost:8080/fhir-R4/getcategories   -- Fetches all the categories available in the database. 
+2.	http://localhost:8080/fhir-R4/fhir/Questionnaire -- Fetches all the Questionnaire resources available in the database.
+3.	http://localhost:8080/fhir-R4/fhir/Questionnaire/9 -- Fetches specific Questionnaire resource based on the Id. 
+4.	http://localhost:8080/fhir-R4/fhir/QuestionnaireResponse -- Fetches all QuestionnaireResponse resources available in the database.
+5.	http://localhost:8080/fhir-R4/fhir/QuestionnaireResponse/1 -- Fetches specific QuestionnaireResponse based on the Id.
+
+POST APIS: 
+
+1.	http://localhost:8080/fhir-R4/fhir/Questionnaire -- Creates given Questionnaire resource with unique Id. 
+2.	http://localhost:8080/fhir-R4/fhir/QuestionnaireResponse -- Creates QuestionnaireResponse resource with unique Id. 
+
 
   
