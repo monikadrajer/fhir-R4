@@ -51,6 +51,7 @@ This will generate a war file under target/fhir-R4.war. Copy this to your tomcat
 
 If tomcat starts successfully then you should be able to access below end points. 
 
+```
 GET END POINTS:
 
 1.	http://localhost:8080/fhir-R4/getcategories   -- Fetches all the categories available in the database. 
@@ -63,6 +64,7 @@ POST APIS:
 
 1.	http://localhost:8080/fhir-R4/fhir/Questionnaire -- Creates given Questionnaire resource with unique Id. 
 2.	http://localhost:8080/fhir-R4/fhir/QuestionnaireResponse -- Creates QuestionnaireResponse resource with unique Id. 
+```
 
 
   
