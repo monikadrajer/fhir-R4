@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
@@ -56,13 +57,17 @@ public class QuestionnaireDaoImpl extends AbstractDao implements QuestionnaireDa
 
 	@Override
 	public DafQuestionnaire getQuestionnaireByVersionId(int theId, String versionId) {
-		Criteria criteria = getSession().createCriteria(DafQuestionnaire.class)
+		
+		Session session = sessionFactory.openSession();
+		Criteria criteria = session.createCriteria(DafQuestionnaire.class)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		Conjunction versionConjunction = Restrictions.conjunction();
 		versionConjunction.add(Restrictions.sqlRestriction("{alias}.data->'meta'->>'versionId' = '" + versionId + "'"));
-		versionConjunction.add(Restrictions.sqlRestriction("{alias}.data->>'id' = '" + theId + "'"));
+		versionConjunction.add(Restrictions.sqlRestriction("id = '" + theId + "'"));
 		criteria.add(versionConjunction);
-		return (DafQuestionnaire) criteria.uniqueResult();
+		DafQuestionnaire dafQuestionnaire = (DafQuestionnaire) criteria.uniqueResult();
+		session.close();
+		return dafQuestionnaire;
 	}
 
 	@Override
@@ -84,6 +89,28 @@ public class QuestionnaireDaoImpl extends AbstractDao implements QuestionnaireDa
 
 	@Override
 	public List<DafQuestionnaire> getAllQuestionnaire() {
+		Session session = sessionFactory.openSession();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+
+	    // UPDATED: Create CriteriaQuery
+	    CriteriaQuery<DafQuestionnaire> criteria = builder.createQuery(DafQuestionnaire.class);
+
+	    // UPDATED: Specify criteria root
+	    Root<DafQuestionnaire> root = criteria.from(DafQuestionnaire.class);
+	    
+	    criteria.select(root);
+
+	    // UPDATED: Execute query
+	    List<DafQuestionnaire> questionnaireList = session.createQuery(criteria).getResultList();
+	    
+	    session.close();
+	    
+	    return questionnaireList;
+
+	}
+	
+	
+	public List<DafQuestionnaire> getQuestionnaireByCategory(String category) {
 		Session session = sessionFactory.openSession();
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 

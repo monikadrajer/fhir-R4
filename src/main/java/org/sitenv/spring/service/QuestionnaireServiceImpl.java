@@ -40,11 +40,14 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
 	@Override
 	public Questionnaire getQuestionnaireByVersionId(int theId, String versionId) {
-
+		
+		Questionnaire questionnaire=null;
 		IParser jsonParser = fhirContext.newJsonParser();
 		DafQuestionnaire dafQuestionnaire = questionnaireDao.getQuestionnaireByVersionId(theId, versionId);
-		Questionnaire questionnaire = jsonParser.parseResource(Questionnaire.class, dafQuestionnaire.getData());
-		questionnaire.setId(new IdType(RESOURCE_TYPE, dafQuestionnaire.getId().toString()));
+		if(dafQuestionnaire!=null) {
+			questionnaire = jsonParser.parseResource(Questionnaire.class, dafQuestionnaire.getData());
+			questionnaire.setId(new IdType(RESOURCE_TYPE, dafQuestionnaire.getId().toString()));
+		}
 		return questionnaire;
 	}
 

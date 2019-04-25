@@ -14,6 +14,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 import ca.uhn.fhir.rest.annotation.Create;
 import ca.uhn.fhir.rest.annotation.IdParam;
 import ca.uhn.fhir.rest.annotation.Read;
+import ca.uhn.fhir.rest.annotation.RequiredParam;
 import ca.uhn.fhir.rest.annotation.ResourceParam;
 import ca.uhn.fhir.rest.annotation.Search;
 import ca.uhn.fhir.rest.api.MethodOutcome;
@@ -54,6 +55,13 @@ public class QuestionnaireResourceProvider implements IResourceProvider {
 
 	@Search
 	public List<Questionnaire> searchAllQuestionnaire() {
+
+		return service.getAllQuestionnaire();
+
+	}
+	
+	@Search
+	public List<Questionnaire> searchQuestionnaireByCategory(@RequiredParam(name = "_category") String category) {
 
 		return service.getAllQuestionnaire();
 
